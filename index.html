@@ -16,35 +16,64 @@
 
 @media (max-width: 480px) {
   body {
-    font-size: 14px; /* slightly smaller on phones */
-  }
-  input, button {
-    width: 100%; /* full width for easier tapping */
-  }
+  margin: 0;
+  background: #f2efe4;
+  color: #1b1e1a;
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  overflow-x: hidden; /* prevents sideways scrolling */
 }
+
+/* Container for promo + form */
 .container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;       /* allows wrapping instead of overflow */
+  max-width: 100%;
 }
 
+/* Responsive adjustments for tablets and phones */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
+    flex-direction: column;   /* stack vertically */
     align-items: center;
+    width: 100%;
+    padding: 1rem;
   }
 }
-img, div {
-  max-width: 100%;
-  height: auto;
+
+/* Specific mobile tweaks */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px; /* slightly smaller text */
+  }
+  input, button {
+    width: 100%;     /* full width for tapping */
+    box-sizing: border-box;
+  }
+  .form-box {
+    width: 95%;      /* shrink form box to fit screen */
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  h1, h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
 }
 
-}
-
+/* Root wrapper */
 #root {
   width: 100%;
   max-width: 480px; /* keeps it narrow on phones */
   margin: 0 auto;   /* centers content */
   padding: 1rem;
+}
+
+/* Prevent images/divs from overflowing */
+img, div {
+  max-width: 100%;
+  height: auto;
 }
 
 }
