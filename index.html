@@ -10,15 +10,43 @@
   background: #f2efe4;
   color: #1b1e1a;
   font-family: "Work Sans", sans-serif;
+        body {
+  font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px; /* slightly smaller on phones */
+  }
+  input, button {
+    width: 100%; /* full width for easier tapping */
+  }
+}
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+img, div {
+  max-width: 100%;
+  height: auto;
+}
+
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 480px; /* keeps it narrow on phones */
+  margin: 0 auto;   /* centers content */
+  padding: 1rem;
+}
+
 }
 
     </style>
