@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xcellent-market Hub — Premium Nigerian Marketplace</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f2efe4;
+        color: #1b1e1a;
+        font-family: "Work Sans", sans-serif;
+      }
+      #root {
+        min-height: 100vh;
+      }
+      * { box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const { useState, useMemo } = React;
+
+      function IconSvg({ children, ...props }) {
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+          >
+            {children}
+          </svg>
+        );
+      }
+
+      function Search(props) {
+        return (
+          <IconSvg {...props}>
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </IconSvg>
+        );
+      }
+
+      function ShoppingCart(props) {
+        return (
+          <IconSvg {...props}>
+            <circle cx="9" cy="20" r="1" />
+            <circle cx="18" cy="20" r="1" />
+            <path d="M3 3h2l2.4 10.4a1 1 0 0 0 1 .8h8.3a1 1 0 0 0 1-.8L16.8 8H7" />
+          </IconSvg>
+        );
+      }
+
+      function Star(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="m12 2 2.9 6 6.6.8-5 4.7 1.5 6.5L12 17.2 5.9 20l1.5-6.5-5-4.7 6.6-.8L12 2Z" />
+          </IconSvg>
+        );
+      }
+
+      function Plus(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M12 5v14" />
+            <path d="M5 12h14" />
+          </IconSvg>
+        );
+      }
+
+      function Minus(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M5 12h14" />
+          </IconSvg>
+        );
+      }
+
+      function Trash2(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M3 6h18" />
+            <path d="M8 6V4h8v2" />
+            <path d="M19 6l-1 14H6L5 6" />
+            <path d="M10 11v6" />
+            <path d="M14 11v6" />
+          </IconSvg>
+        );
+      }
+
+      function Store(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M3 10 12 3l9 7" />
+            <path d="M5 10v10h14V10" />
+            <path d="M9 20v-6h6v6" />
+          </IconSvg>
+        );
+      }
+
+      function Package(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M3 7 12 3l9 4v10l-9 4-9-4Z" />
+            <path d="M3 7v10l9 4 9-4V7" />
+            <path d="M12 3v18" />
+          </IconSvg>
+        );
+      }
+
+      function X(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </IconSvg>
+        );
+      }
+
+      function Check(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="m5 12 5 5 9-10" />
+          </IconSvg>
+        );
+      }
+
+      function TrendingUp(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M3 17 9 11l4 4 8-8" />
+            <path d="M14 7h7v7" />
+          </IconSvg>
+        );
+      }
+
+      function ChevronLeft(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="m15 18-6-6 6-6" />
+          </IconSvg>
+        );
+      }
+
+      function Menu(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M4 7h16" />
+            <path d="M4 12h16" />
+            <path d="M4 17h16" />
+          </IconSvg>
+        );
+      }
+
+      function User(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M20 21a8 8 0 0 0-16 0" />
+            <circle cx="12" cy="8" r="4" />
+          </IconSvg>
+        );
+      }
+
+      function Moon(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+          </IconSvg>
+        );
+      }
+
+      function Sun(props) {
+        return (
+          <IconSvg {...props}>
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m4.93 19.07 1.41-1.41" />
+            <path d="m17.66 6.34 1.41-1.41" />
+          </IconSvg>
+        );
+      }
+
+      function BadgeCheck(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M12 3l7 3v5c0 4.5-2.9 7.8-7 9-4.1-1.2-7-4.5-7-9V6l7-3Z" />
+            <path d="m9.5 12 1.8 1.8 3.7-4" />
+          </IconSvg>
+        );
+      }
+
+      function Truck(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M3 7h11v8H3z" />
+            <path d="M14 9h4l3 3v3h-7" />
+            <circle cx="7" cy="17" r="2" />
+            <circle cx="17" cy="17" r="2" />
+          </IconSvg>
+        );
+      }
+
+      function ShieldCheck(props) {
+        return (
+          <IconSvg {...props}>
+            <path d="M12 3 5 6v6c0 5 3.4 8.3 7 9 3.6-.7 7-4 7-9V6l-7-3Z" />
+            <path d="m9.5 12 1.8 1.8 3.7-4" />
+          </IconSvg>
+        );
+      }
+
+      function PlusCircle(props) {
+        return (
+          <IconSvg {...props}>
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v8" />
+            <path d="M8 12h8" />
+          </IconSvg>
+        );
+      }
+
+      const TOKENS = (theme) => `
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+        .xc {
+          --paper: ${theme === "dark" ? "#07100d" : "#F2EFE4"};
+          --surface: ${theme === "dark" ? "#101b17" : "#FFFFFF"};
+          --ink: ${theme === "dark" ? "#f5efe7" : "#1B1E1A"};
+          --ink-soft: ${theme === "dark" ? "#a8b8af" : "#565A4F"};
+          --forest: ${theme === "dark" ? "#3b7d5c" : "#1F3A2E"};
+          --forest-light: ${theme === "dark" ? "#4d8d68" : "#2E5245"};
+          --brass: ${theme === "dark" ? "#d89a48" : "#B9722F"};
+          --brass-light: ${theme === "dark" ? "#ffcf8b" : "#E3B27C"};
+          --brass-bg: ${theme === "dark" ? "#2d2318" : "#F6E7D3"};
+          --danger: ${theme === "dark" ? "#ff7d6b" : "#A63A2E"};
+          --success: ${theme === "dark" ? "#63c98f" : "#3C7A4F"};
+          --line: ${theme === "dark" ? "#263530" : "#DCD7C6"};
+          font-family: 'Work Sans', sans-serif;
+          color: var(--ink);
+          background: var(--paper);
+        }
+        .xc h1, .xc h2, .xc h3, .xc .display { font-family: 'Fraunces', serif; }
+        .xc .mono { font-family: 'IBM Plex Mono', monospace; }
+        .xc button { font-family: inherit; cursor: pointer; }
+        .xc-tag { position: relative; }
+        .xc-tag::before {
+          content: '';
+          position: absolute;
+          top: -6px;
+          right: 14px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: var(--paper);
+          border: 1.5px solid var(--brass);
+        }
+        .xc-perf {
+          background-image: radial-gradient(circle, var(--line) 1.4px, transparent 1.5px);
+          background-size: 10px 2px;
+          background-repeat: repeat-x;
+          background-position: left center;
+          height: 2px;
+        }
+        .xc-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+        .xc-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+      `;
+
+      const CATEGORIES = ["All", "Food & Drink", "Fashion", "Accessories", "Headphones", "Home & Craft", "Wellness", "Outdoors"];
+
+      const SELLERS = {
+        s1: { name: "Lagos Looms", rating: 4.8, sales: 1240, joined: "2021" },
+        s2: { name: "Naija Kitchen Co.", rating: 4.9, sales: 860, joined: "2022" },
+        s3: { name: "Abuja Aroma", rating: 4.6, sales: 3120, joined: "2020" },
+        s4: { name: "Eko Essence", rating: 4.7, sales: 540, joined: "2023" },
+        s5: { name: "Savanna Outfitters", rating: 4.9, sales: 2210, joined: "2019" },
+      };
+
+      const PRODUCTS = [
+        { id: "p1", title: "Suya spice kit", price: 6500, category: "Food & Drink", seller: "s2", rating: 4.9, reviews: 128, stock: 18, emoji: "🌶️", color: "#7B2F1F", desc: "A premium blend of peanuts, chili, ginger and traditional spices for authentic Lagos suya at home." },
+        { id: "p2", title: "Adire indigo scarf", price: 11200, category: "Fashion", seller: "s1", rating: 4.8, reviews: 74, stock: 12, emoji: "🧣", color: "#264653", desc: "Hand-dyed indigo scarf woven with traditional adire patterns by skilled Nigerian artisans." },
+        { id: "p3", title: "Aso-oke earrings", price: 8200, category: "Fashion", seller: "s5", rating: 4.7, reviews: 52, stock: 22, emoji: "💫", color: "#5A3E2B", desc: "Statement earrings with hand-beaded aso-oke details for polished, modern styling." },
+        { id: "p4", title: "Palm wine gift set", price: 4600, category: "Food & Drink", seller: "s3", rating: 4.6, reviews: 68, stock: 24, emoji: "🥥", color: "#B0846E", desc: "A small-batch palm wine set with kola nut accents and artisan crackers for celebratory moments." },
+        { id: "p5", title: "Nkwobi serving board", price: 13900, category: "Home & Craft", seller: "s4", rating: 4.9, reviews: 45, stock: 8, emoji: "🍽️", color: "#8B5E34", desc: "Hand-carved iroko board designed for serving nkwobi, with a luxe finish for tabletop display." },
+        { id: "p6", title: "Oriki scented candle", price: 5300, category: "Wellness", seller: "s4", rating: 4.8, reviews: 89, stock: 30, emoji: "🕯️", color: "#6B7A5A", desc: "A warm soy candle scented with orange blossom and hibiscus, inspired by Nigerian evening rituals." },
+        { id: "p7", title: "Agbada lounge tee", price: 14500, category: "Fashion", seller: "s5", rating: 4.7, reviews: 101, stock: 19, emoji: "👕", color: "#2F4F4F", desc: "Soft cotton tee with couture agbada embroidery, designed for elevated everyday comfort." },
+        { id: "p8", title: "Ginger cake spice bundle", price: 3900, category: "Food & Drink", seller: "s2", rating: 4.8, reviews: 110, stock: 44, emoji: "🍪", color: "#C47F37", desc: "A kitchen-ready spice pack for ginger cake, biscuits and nostalgic Nigerian treats." },
+        { id: "p9", title: "Studio sound headphones", price: 24500, category: "Headphones", seller: "s3", rating: 4.9, reviews: 151, stock: 14, emoji: "🎧", color: "#2D4A4A", desc: "Deep bass, studio-grade clarity and a premium finish for music lovers and remote work alike." },
+        { id: "p10", title: "Brass key holder", price: 7200, category: "Accessories", seller: "s1", rating: 4.7, reviews: 61, stock: 26, emoji: "🗝️", color: "#8A5A3E", desc: "A handcrafted brass accessory with a sculptural silhouette for elevated daily carry." },
+        { id: "p11", title: "Jollof spice box", price: 5800, category: "Food & Drink", seller: "s2", rating: 4.8, reviews: 88, stock: 33, emoji: "🍲", color: "#A15121", desc: "A signature blend of tomato, pepper and aromatics for rich, restaurant-style jollof at home." },
+        { id: "p12", title: "Plantain chips sampler", price: 4100, category: "Food & Drink", seller: "s4", rating: 4.6, reviews: 73, stock: 40, emoji: "🥨", color: "#B68034", desc: "A curated box of crunchy plantain chips with chili and sea salt flavours for gifting or snacking." },
+      ];
+
+      const WALLET_BALANCE = 128400;
+
+      const money = (n) => {
+        if (typeof n !== 'number') return '';
+        return '₦' + new Intl.NumberFormat('en-NG', { maximumFractionDigits: 0 }).format(n);
+      };
+
+      function XcelCommerce() {
+        const [view, setView] = useState("browse");
+        const [category, setCategory] = useState("All");
+        const [query, setQuery] = useState("");
+        const [selected, setSelected] = useState(null);
+        const [cart, setCart] = useState([]);
+        const [toast, setToast] = useState(null);
+        const [order, setOrder] = useState(null);
+        const [walletCredit, setWalletCredit] = useState(WALLET_BALANCE);
+        const [walletApplied, setWalletApplied] = useState(false);
+        const [sellerTab, setSellerTab] = useState("listings");
+        const [navOpen, setNavOpen] = useState(false);
+        const [theme, setTheme] = useState("light");
+        const [authMode, setAuthMode] = useState("login");
+        const [authUser, setAuthUser] = useState(null);
+        const [users, setUsers] = useState([]);
+        const [authForm, setAuthForm] = useState({ name: "", email: "", password: "" });
+        const [termsAccepted, setTermsAccepted] = useState(false);
+        const [showPolicy, setShowPolicy] = useState(false);
+        const [verificationState, setVerificationState] = useState({ sent: false, verified: false });
+        const [authMessage, setAuthMessage] = useState("");
+
+        const themeVars = theme === "dark" ? {
+          "--paper": "#07100d",
+          "--surface": "#101b17",
+          "--ink": "#f5efe7",
+          "--ink-soft": "#a8b8af",
+          "--forest": "#3b7d5c",
+          "--forest-light": "#4d8d68",
+          "--brass": "#d89a48",
+          "--brass-light": "#ffcf8b",
+          "--brass-bg": "#2d2318",
+          "--danger": "#ff7d6b",
+          "--success": "#63c98f",
+          "--line": "#263530",
+        } : {
+          "--paper": "#F2EFE4",
+          "--surface": "#FFFFFF",
+          "--ink": "#1B1E1A",
+          "--ink-soft": "#565A4F",
+          "--forest": "#1F3A2E",
+          "--forest-light": "#2E5245",
+          "--brass": "#B9722F",
+          "--brass-light": "#E3B27C",
+          "--brass-bg": "#F6E7D3",
+          "--danger": "#A63A2E",
+          "--success": "#3C7A4F",
+          "--line": "#DCD7C6",
+        };
+
+        const showToast = (msg) => {
+          setToast(msg);
+          setTimeout(() => setToast(null), 1800);
+        };
+
+        const filtered = useMemo(() => {
+          return PRODUCTS.filter(p =>
+            (category === "All" || p.category === category) &&
+            p.title.toLowerCase().includes(query.toLowerCase())
+          );
+        }, [category, query]);
+
+        const cartCount = cart.reduce((s, i) => s + i.qty, 0);
+        const subtotal = cart.reduce((s, i) => s + i.qty * i.product.price, 0);
+        const fee = subtotal * 0.08;
+        const shipping = cart.length ? 6.5 : 0;
+        const total = subtotal + fee + shipping;
+        const walletSavings = walletApplied ? Math.min(walletCredit, total) : 0;
+        const payable = total - walletSavings;
+
+        const addToCart = (product, qty = 1) => {
+          setCart(prev => {
+            const existing = prev.find(i => i.product.id === product.id);
+            if (existing) {
+              return prev.map(i => i.product.id === product.id ? { ...i, qty: i.qty + qty } : i);
+            }
+            return [...prev, { product, qty }];
+          });
+          showToast(`Added ${product.title} to cart`);
+        };
+
+        const updateQty = (id, delta) => {
+          setCart(prev => prev.map(i => i.product.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i).filter(i => i.qty > 0));
+        };
+
+        const removeItem = (id) => setCart(prev => prev.filter(i => i.product.id !== id));
+
+        const goto = (v) => { setView(v); setNavOpen(false); window.scrollTo?.(0, 0); };
+
+        const openProduct = (p) => { setSelected(p); goto("product"); };
+
+        const placeOrder = () => {
+          setOrder({ id: "XC-" + Math.floor(10000 + Math.random() * 89999), items: cart, total: payable, date: new Date().toLocaleDateString() });
+          setWalletCredit(prev => prev - walletSavings);
+          setCart([]);
+          setWalletApplied(false);
+          goto("confirmation");
+        };
+
+        const handleAuthSubmit = (e) => {
+          e.preventDefault();
+          if (authMode === "signup") {
+            if (!authForm.name || !authForm.email || !authForm.password) {
+              setAuthMessage("Please complete your profile details.");
+              return;
+            }
+            if (!termsAccepted) {
+              setAuthMessage("Accept the terms and privacy policy to continue.");
+              return;
+            }
+            if (authForm.password.length < 6) {
+              setAuthMessage("Choose a password with at least 6 characters.");
+              return;
+            }
+            if (users.some(user => user.email.toLowerCase() === authForm.email.toLowerCase())) {
+              setAuthMessage("That email is already registered.");
+              return;
+            }
+            const newUser = { name: authForm.name.trim(), email: authForm.email.trim(), password: authForm.password, verified: false };
+            setUsers(prev => [...prev, newUser]);
+            setVerificationState({ sent: true, verified: false });
+            setAuthMessage(`Verification email sent to ${newUser.email}. Please confirm it to access the marketplace.`);
+            setAuthForm({ name: "", email: "", password: "" });
+            setTermsAccepted(false);
+            setAuthMode("login");
+            return;
+          }
+
+          const foundUser = users.find(user => user.email.toLowerCase() === authForm.email.toLowerCase() && user.password === authForm.password);
+          if (!foundUser) {
+            setAuthMessage("Wrong email or password. Please try again.");
+            return;
+          }
+          if (!foundUser.verified) {
+            setVerificationState({ sent: true, verified: false });
+            setAuthMessage("Please verify your email before entering the marketplace.");
+            return;
+          }
+          setAuthUser(foundUser);
+          setAuthMessage("");
+          setView("browse");
+          showToast(`Welcome back, ${foundUser.name}`);
+        };
+
+        const handleVerifyEmail = () => {
+          if (!authForm.email) {
+            setAuthMessage("Enter your email address first.");
+            return;
+          }
+          const target = users.find(user => user.email.toLowerCase() === authForm.email.toLowerCase());
+          if (!target) {
+            setAuthMessage("We could not find that account. Sign up first.");
+            return;
+          }
+          setUsers(prev => prev.map(user => user.email.toLowerCase() === target.email.toLowerCase() ? { ...user, verified: true } : user));
+          setVerificationState({ sent: true, verified: true });
+          setAuthMessage("Email verified. You can sign in now.");
+        };
+
+        const handleLogout = () => {
+          setAuthUser(null);
+          setAuthMode("login");
+          setAuthForm({ name: "", email: "", password: "" });
+          setAuthMessage("");
+        };
+
+        return (
+          <div className="xc" style={{ ...themeVars, minHeight: "100vh", paddingBottom: "3rem" }}>
+            <style>{TOKENS(theme)}</style>
+
+            {!authUser ? (
+              <AuthScreen
+                theme={theme}
+                setTheme={setTheme}
+                authMode={authMode}
+                setAuthMode={setAuthMode}
+                authForm={authForm}
+                setAuthForm={setAuthForm}
+                termsAccepted={termsAccepted}
+                setTermsAccepted={setTermsAccepted}
+                showPolicy={showPolicy}
+                setShowPolicy={setShowPolicy}
+                authMessage={authMessage}
+                verificationState={verificationState}
+                onSubmit={handleAuthSubmit}
+                onVerify={handleVerifyEmail}
+              />
+            ) : (
+              <>
+            <header style={{ background: "var(--forest)", color: "var(--paper)", position: "sticky", top: 0, zIndex: 20 }}>
+              <div style={{ maxWidth: 1100, margin: "0 auto", padding: "14px 20px", display: "flex", alignItems: "center", gap: 16 }}>
+                <button onClick={() => setNavOpen(!navOpen)} style={{ background: "none", border: "none", color: "var(--paper)", display: "none" }} className="xc-menu-btn">
+                  <Menu size={22} />
+                </button>
+                <div onClick={() => goto('browse')} className="display" style={{ fontSize: 24, fontWeight: 700, letterSpacing: 0.5, cursor: 'pointer', flexShrink: 0, background: 'linear-gradient(135deg, var(--brass-light), var(--brass))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textShadow: 'none' }}>
+                  Xcellent-market <span style={{ color: 'var(--brass-light)' }}>Hub</span>
+                </div>
+                <div style={{ flex: 1, display: "flex", alignItems: "center", background: "rgba(255,255,255,0.18)", borderRadius: 12, padding: "10px 14px", maxWidth: 520, boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.16)" }}>
+                  <Search size={18} color="var(--paper)" style={{ opacity: 0.76, flexShrink: 0 }} />
+                  <input
+                    value={query}
+                    onChange={e => { setQuery(e.target.value); if (view !== "browse") goto("browse"); }}
+                    placeholder="Search premium snacks, fashion, home decor..."
+                    style={{ background: "none", border: "none", outline: "none", color: "var(--paper)", marginLeft: 12, width: "100%", fontSize: 14, letterSpacing: 0.2 }}
+                  />
+                </div>
+                <nav style={{ display: "flex", gap: 4, marginLeft: "auto", alignItems: "center" }}>
+                  <NavBtn active={view === "browse"} onClick={() => goto("browse")}>Browse</NavBtn>
+                  <NavBtn active={view === "seller"} onClick={() => goto("seller")}>Sell</NavBtn>
+                  <NavBtn active={view === "orders"} onClick={() => goto("orders")}>Orders</NavBtn>
+                  <button onClick={() => goto("cart")} style={{ position: "relative", background: "none", border: "none", color: "var(--paper)", padding: "8px 10px", display: "flex", alignItems: "center" }}>
+                    <ShoppingCart size={20} />
+                    {cartCount > 0 && (
+                      <span className="mono" style={{ position: "absolute", top: 2, right: 2, background: "var(--brass)", color: "#fff", fontSize: 10, borderRadius: "50%", width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        {cartCount}
+                      </span>
+                    )}
+                  </button>
+                </nav>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 12 }}>
+                  <div style={{ display: "flex", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", overflow: "hidden", background: "rgba(255,255,255,0.12)" }}>
+                    <button onClick={() => setTheme("light")} style={{ padding: "8px 10px", border: "none", background: theme === "light" ? "rgba(255,255,255,0.18)" : "transparent", color: "var(--paper)" }}><Sun size={15} /></button>
+                    <button onClick={() => setTheme("dark")} style={{ padding: "8px 10px", border: "none", background: theme === "dark" ? "rgba(255,255,255,0.18)" : "transparent", color: "var(--paper)" }}><Moon size={15} /></button>
+                  </div>
+                  <div style={{ padding: "10px 14px", borderRadius: 18, background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.15)", minWidth: 170, textAlign: "right" }}>
+                    <div className="mono" style={{ fontSize: 11, letterSpacing: 1.4, color: "var(--brass-light)", marginBottom: 4, textTransform: "uppercase" }}>Wallet balance</div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: "var(--paper)" }}>{money(walletCredit)}</div>
+                  </div>
+                  <button onClick={handleLogout} style={{ padding: "9px 12px", borderRadius: 999, border: "1px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.12)", color: "var(--paper)" }}>Logout</button>
+                </div>
+              </div>
+            </header>
+
+            {toast && (
+              <div style={{ position: "fixed", bottom: 20, left: "50%", transform: "translateX(-50%)", background: "var(--ink)", color: "var(--paper)", padding: "10px 18px", borderRadius: 8, fontSize: 14, zIndex: 50, display: "flex", alignItems: "center", gap: 8 }}>
+                <Check size={16} color="var(--brass-light)" /> {toast}
+              </div>
+            )}
+
+            <main style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 20px" }}>
+              {view === "browse" && (
+                <Browse category={category} setCategory={setCategory} products={filtered} onOpen={openProduct} onAdd={addToCart} />
+              )}
+              {view === "product" && selected && (
+                <ProductDetail product={selected} onBack={() => goto("browse")} onAdd={addToCart} onGoCart={() => goto("cart")} />
+              )}
+              {view === "cart" && (
+                <Cart cart={cart} subtotal={subtotal} fee={fee} shipping={shipping} total={total}
+                  onQty={updateQty} onRemove={removeItem} onCheckout={() => goto("checkout")} onBrowse={() => goto("browse")} />
+              )}
+              {view === "checkout" && (
+                <Checkout
+                  subtotal={subtotal}
+                  shipping={shipping}
+                  total={total}
+                  walletCredit={walletCredit}
+                  walletApplied={walletApplied}
+                  walletSavings={walletSavings}
+                  onToggleWallet={() => setWalletApplied(prev => !prev)}
+                  onPlace={placeOrder}
+                  onBack={() => goto("cart")}
+                />
+              )}
+              {view === "confirmation" && order && (
+                <Confirmation order={order} onBrowse={() => goto("browse")} onOrders={() => goto("orders")} />
+              )}
+              {view === "seller" && (
+                <SellerDashboard tab={sellerTab} setTab={setSellerTab} />
+              )}
+              {view === "orders" && (
+                <Orders onBrowse={() => goto("browse")} />
+              )}
+            </main>
+              </>
+            )}
+          </div>
+        );
+      }
+
+      function AuthScreen({ theme, setTheme, authMode, setAuthMode, authForm, setAuthForm, termsAccepted, setTermsAccepted, showPolicy, setShowPolicy, authMessage, verificationState, onSubmit, onVerify }) {
+        const fieldStyle = {
+          width: "100%",
+          padding: "11px 12px",
+          borderRadius: 10,
+          border: "1px solid var(--line)",
+          background: "var(--surface)",
+          color: "var(--ink)",
+          marginTop: 6,
+          outline: "none",
+        };
+
+        return (
+          <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+            <div style={{ width: "100%", maxWidth: 980, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 24, overflow: "hidden", boxShadow: "0 20px 60px rgba(0,0,0,0.16)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 0 }}>
+                <div style={{ background: "linear-gradient(135deg, var(--forest), var(--brass))", color: "var(--paper)", padding: 32 }}>
+                  <div className="mono" style={{ fontSize: 11, letterSpacing: 1.8, opacity: 0.8 }}>XCELLENT-MARKET HUB</div>
+                  <h1 style={{ fontSize: 34, margin: "10px 0 12px", lineHeight: 1.08 }}>Sign in to a premium marketplace built for modern Nigerian buyers.</h1>
+                  <p style={{ fontSize: 15, lineHeight: 1.7, opacity: 0.9 }}>Secure access, email verification, wallet savings and curated food, fashion, headphones and accessories in one beautifully designed storefront.</p>
+                  <div style={{ display: "grid", gap: 10, marginTop: 22 }}>
+                    <FeatureRow title="Verified account access" desc="A trusted sign-up and login flow with email confirmation." />
+                    <FeatureRow title="Premium support" desc="Terms, privacy policy and buyer protection built in." />
+                    <FeatureRow title="Theme ready" desc="Switch between white and black interfaces instantly." />
+                  </div>
+                </div>
+                <div style={{ padding: 28 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                    <div>
+                      <div className="mono" style={{ fontSize: 11, letterSpacing: 1.6, color: "var(--brass)" }}>AUTHENTICATION</div>
+                      <h2 style={{ margin: "4px 0 0", fontSize: 24 }}>Welcome back</h2>
+                    </div>
+                    <div style={{ display: "flex", borderRadius: 999, border: "1px solid var(--line)", overflow: "hidden" }}>
+                      <button onClick={() => setTheme("light")} style={{ padding: "7px 9px", border: "none", background: theme === "light" ? "var(--brass-bg)" : "transparent", color: "var(--ink)" }}><Sun size={14} /></button>
+                      <button onClick={() => setTheme("dark")} style={{ padding: "7px 9px", border: "none", background: theme === "dark" ? "var(--brass-bg)" : "transparent", color: "var(--ink)" }}><Moon size={14} /></button>
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", gap: 8, marginBottom: 18 }}>
+                    <AuthTab active={authMode === "login"} onClick={() => setAuthMode("login")}>Login</AuthTab>
+                    <AuthTab active={authMode === "signup"} onClick={() => setAuthMode("signup")}>Sign up</AuthTab>
+                  </div>
+
+                  <form onSubmit={onSubmit} style={{ display: "grid", gap: 12 }}>
+                    {authMode === "signup" && (
+                      <div>
+                        <label style={{ fontSize: 12, color: "var(--ink-soft)" }}>Full name</label>
+                        <input value={authForm.name} onChange={e => setAuthForm({ ...authForm, name: e.target.value })} style={fieldStyle} placeholder="Ada Okafor" />
+                      </div>
+                    )}
+                    <div>
+                      <label style={{ fontSize: 12, color: "var(--ink-soft)" }}>Email address</label>
+                      <input type="email" value={authForm.email} onChange={e => setAuthForm({ ...authForm, email: e.target.value })} style={fieldStyle} placeholder="you@example.com" />
+                    </div>
+                    <div>
+                      <label style={{ fontSize: 12, color: "var(--ink-soft)" }}>Password</label>
+                      <input type="password" value={authForm.password} onChange={e => setAuthForm({ ...authForm, password: e.target.value })} style={fieldStyle} placeholder="Minimum 6 characters" />
+                    </div>
+                    <label style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 12, color: "var(--ink-soft)", lineHeight: 1.5 }}>
+                      <input type="checkbox" checked={termsAccepted} onChange={() => setTermsAccepted(!termsAccepted)} />
+                      <span>I agree to the <button type="button" onClick={() => setShowPolicy(true)} style={{ background: "none", border: "none", color: "var(--brass)", padding: 0, font: "inherit" }}>Terms & Privacy Policy</button>.</span>
+                    </label>
+                    <button type="submit" style={{ background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 10, padding: "11px 14px", fontWeight: 600 }}>
+                      {authMode === "signup" ? "Create my account" : "Enter marketplace"}
+                    </button>
+                    {authMode === "login" && (
+                      <button type="button" onClick={onVerify} style={{ background: "var(--surface)", color: "var(--ink)", border: "1px solid var(--line)", borderRadius: 10, padding: "11px 14px", fontWeight: 600 }}>
+                        {verificationState.verified ? "Verified" : "Verify email"}
+                      </button>
+                    )}
+                  </form>
+
+                  {authMessage && <div style={{ marginTop: 12, padding: "10px 12px", borderRadius: 10, background: "var(--brass-bg)", color: "var(--ink)", fontSize: 13 }}>{authMessage}</div>}
+
+                  {showPolicy && (
+                    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.45)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, zIndex: 50 }}>
+                      <div style={{ maxWidth: 560, width: "100%", background: "var(--surface)", borderRadius: 18, padding: 20, border: "1px solid var(--line)" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                          <h3 style={{ margin: 0 }}>Terms & Privacy Policy</h3>
+                          <button onClick={() => setShowPolicy(false)} style={{ background: "none", border: "none", color: "var(--ink-soft)", fontSize: 16 }}>✕</button>
+                        </div>
+                        <p style={{ fontSize: 13, color: "var(--ink-soft)", lineHeight: 1.6 }}>
+                          Xcellent-market Hub protects your data, verifies your email before access, and only uses your information to complete purchases and deliver secure account support. You agree to use the marketplace responsibly, respect seller policies and keep your account credentials private.
+                        </p>
+                        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 12 }}>
+                          <button onClick={() => setShowPolicy(false)} style={{ background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 8, padding: "8px 12px" }}>Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      function AuthTab({ active, onClick, children }) {
+        return (
+          <button onClick={onClick} style={{ flex: 1, padding: "9px 12px", borderRadius: 999, border: active ? "1px solid var(--forest)" : "1px solid var(--line)", background: active ? "var(--forest)" : "var(--surface)", color: active ? "var(--paper)" : "var(--ink)", fontWeight: 600 }}>
+            {children}
+          </button>
+        );
+      }
+
+      function FeatureRow({ title, desc }) {
+        return (
+          <div style={{ background: "rgba(255,255,255,0.14)", borderRadius: 12, padding: 12 }}>
+            <div style={{ fontWeight: 600 }}>{title}</div>
+            <div style={{ fontSize: 12, opacity: 0.84, marginTop: 4 }}>{desc}</div>
+          </div>
+        );
+      }
+
+      function NavBtn({ active, onClick, children }) {
+        return (
+          <button onClick={onClick} style={{
+            background: active ? "rgba(255,255,255,0.14)" : "none",
+            border: "none", color: "var(--paper)", padding: "8px 12px",
+            borderRadius: 6, fontSize: 14, fontWeight: 500,
+          }}>{children}</button>
+        );
+      }
+
+      function Section({ eyebrow, title, children }) {
+        return (
+          <div style={{ marginBottom: 28 }}>
+            {eyebrow && <div className="mono" style={{ fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase", color: "var(--brass)", marginBottom: 4 }}>{eyebrow}</div>}
+            {title && <h2 style={{ fontSize: 26, fontWeight: 600, margin: "0 0 14px" }}>{title}</h2>}
+            {children}
+          </div>
+        );
+      }
+
+      function Browse({ category, setCategory, products, onOpen, onAdd }) {
+        return (
+          <div>
+            <div style={{ background: "var(--forest)", borderRadius: 14, padding: "36px 32px", color: "var(--paper)", marginBottom: 28, display: "grid", gridTemplateColumns: "1.3fr 0.9fr", gap: 24, alignItems: "center" }}>
+              <div style={{ maxWidth: 600 }}>
+                <div className="mono" style={{ fontSize: 11, letterSpacing: 1.5, color: "var(--brass-light)", marginBottom: 8 }}>XCELLENT-MARKET HUB</div>
+                <h1 style={{ fontSize: 36, lineHeight: 1.08, margin: "0 0 14px" }}>Premium Nigerian delicacies, fashion and craft made for modern living.</h1>
+                <p style={{ opacity: 0.88, fontSize: 15, margin: 0 }}>Curated goods from Lagos, Abuja, and beyond, delivered with secure checkout, biometric access and wallet savings. Browse {PRODUCTS.length} luxury items across {CATEGORIES.length - 1} categories.</p>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+                <Stat label="Local sellers" value="85+" />
+                <Stat label="Wallet credit" value={money(WALLET_BALANCE)} />
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 8, marginBottom: 22, overflowX: "auto" }} className="xc-scroll">
+              {CATEGORIES.map(c => (
+                <button key={c} onClick={() => setCategory(c)} style={{
+                  padding: "8px 16px", borderRadius: 20, border: `1px solid ${category === c ? "var(--forest)" : "var(--line)"}`,
+                  background: category === c ? "var(--forest)" : "var(--surface)",
+                  color: category === c ? "var(--paper)" : "var(--ink)",
+                  fontSize: 13, fontWeight: 500, whiteSpace: "nowrap"
+                }}>{c}</button>
+              ))}
+            </div>
+
+            {products.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "60px 0", color: "var(--ink-soft)" }}>
+                No listings match that search. Try a different term or category.
+              </div>
+            ) : (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 18 }}>
+                {products.map(p => <ProductCard key={p.id} product={p} onOpen={onOpen} onAdd={onAdd} />)}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      function Stat({ label, value }) {
+        return (
+          <div>
+            <div style={{ fontSize: 20, fontWeight: 600 }}>{value}</div>
+            <div style={{ fontSize: 10, opacity: 0.75, letterSpacing: 1 }}>{label.toUpperCase()}</div>
+          </div>
+        );
+      }
+
+      function ProductCard({ product, onOpen, onAdd }) {
+        return (
+          <div style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+            <div onClick={() => onOpen(product)} style={{ cursor: "pointer", height: 140, background: product.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 44 }}>
+              {product.emoji}
+            </div>
+            <div style={{ padding: 14, display: "flex", flexDirection: "column", gap: 6, flex: 1 }}>
+              <div style={{ fontSize: 11, color: "var(--ink-soft)" }}>{SELLERS[product.seller].name}</div>
+              <div onClick={() => onOpen(product)} style={{ cursor: "pointer", fontWeight: 500, fontSize: 15, lineHeight: 1.3 }}>{product.title}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "var(--ink-soft)" }}>
+                <Star size={12} fill="var(--brass)" color="var(--brass)" /> {product.rating} ({product.reviews})
+              </div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto", paddingTop: 8 }}>
+                <span className="mono xc-tag" style={{ fontSize: 16, fontWeight: 500, background: "var(--brass-bg)", color: "var(--brass)", padding: "4px 10px 4px 14px", borderRadius: "2px 8px 8px 2px" }}>{money(product.price)}</span>
+                <button onClick={() => onAdd(product)} style={{ background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 6, padding: "7px 10px", display: "flex", alignItems: "center", gap: 4, fontSize: 12 }}>
+                  <Plus size={13} /> Add
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      function ProductDetail({ product, onBack, onAdd, onGoCart }) {
+        const [qty, setQty] = useState(1);
+        const seller = SELLERS[product.seller];
+        return (
+          <div>
+            <button onClick={onBack} style={{ background: "none", border: "none", display: "flex", alignItems: "center", gap: 4, color: "var(--ink-soft)", marginBottom: 18, fontSize: 13 }}>
+              <ChevronLeft size={16} /> Back to browsing
+            </button>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}>
+              <div style={{ background: product.color, borderRadius: 14, height: 340, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 90 }}>
+                {product.emoji}
+              </div>
+              <div>
+                <div style={{ fontSize: 12, color: "var(--brass)", fontWeight: 500, marginBottom: 6 }}>{product.category}</div>
+                <h1 style={{ fontSize: 30, margin: "0 0 8px" }}>{product.title}</h1>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "var(--ink-soft)", marginBottom: 16 }}>
+                  <Star size={14} fill="var(--brass)" color="var(--brass)" /> {product.rating} · {product.reviews} reviews · {product.stock} in stock
+                </div>
+                <div className="mono" style={{ fontSize: 28, fontWeight: 500, marginBottom: 16 }}>{money(product.price)}</div>
+                <p style={{ fontSize: 15, lineHeight: 1.6, color: "var(--ink-soft)", marginBottom: 20 }}>{product.desc}</p>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
+                  <div style={{ display: "flex", alignItems: "center", border: "1px solid var(--line)", borderRadius: 8 }}>
+                    <button onClick={() => setQty(Math.max(1, qty - 1))} style={{ background: "none", border: "none", padding: "8px 12px" }}><Minus size={14} /></button>
+                    <span className="mono" style={{ minWidth: 24, textAlign: "center" }}>{qty}</span>
+                    <button onClick={() => setQty(qty + 1)} style={{ background: "none", border: "none", padding: "8px 12px" }}><Plus size={14} /></button>
+                  </div>
+                  <button onClick={() => { onAdd(product, qty); onGoCart(); }} style={{ flex: 1, background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 8, padding: "12px 18px", fontSize: 14, fontWeight: 500 }}>
+                    Add to cart · {money(product.price * qty)}
+                  </button>
+                </div>
+
+                <div style={{ display: "flex", gap: 16, fontSize: 12, color: "var(--ink-soft)", marginBottom: 20 }}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Truck size={14} /> Ships in 2-3 days</span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 4 }}><ShieldCheck size={14} /> Buyer protection</span>
+                </div>
+
+                <div style={{ border: "1px solid var(--line)", borderRadius: 10, padding: 14, display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: "var(--brass-bg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Store size={18} color="var(--brass)" />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 500, fontSize: 14, display: "flex", alignItems: "center", gap: 4 }}>{seller.name} <BadgeCheck size={14} color="var(--forest)" /></div>
+                    <div style={{ fontSize: 12, color: "var(--ink-soft)" }}>{seller.rating}★ seller rating · {seller.sales} sales · joined {seller.joined}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      function Cart({ cart, subtotal, fee, shipping, total, onQty, onRemove, onCheckout, onBrowse }) {
+        if (cart.length === 0) {
+          return (
+            <div style={{ textAlign: "center", padding: "70px 0" }}>
+              <ShoppingCart size={36} color="var(--ink-soft)" style={{ marginBottom: 12 }} />
+              <h2 style={{ margin: "0 0 8px" }}>Your cart is empty</h2>
+              <p style={{ color: "var(--ink-soft)", marginBottom: 20 }}>Add something from one of our sellers to get started.</p>
+              <button onClick={onBrowse} style={{ background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 8, padding: "10px 20px" }}>Browse listings</button>
+            </div>
+          );
+        }
+        return (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: 32 }}>
+            <div>
+              <h2 style={{ fontSize: 24, marginBottom: 16 }}>Your cart ({cart.length})</h2>
+              {cart.map(({ product, qty }) => (
+                <div key={product.id} style={{ display: "flex", gap: 14, padding: "14px 0", borderBottom: "1px solid var(--line)" }}>
+                  <div style={{ width: 60, height: 60, background: product.color, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, flexShrink: 0 }}>{product.emoji}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 500, fontSize: 14 }}>{product.title}</div>
+                    <div style={{ fontSize: 12, color: "var(--ink-soft)", marginBottom: 8 }}>{SELLERS[product.seller].name}</div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div style={{ display: "flex", alignItems: "center", border: "1px solid var(--line)", borderRadius: 6 }}>
+                        <button onClick={() => onQty(product.id, -1)} style={{ background: "none", border: "none", padding: "4px 8px" }}><Minus size={12} /></button>
+                        <span className="mono" style={{ fontSize: 12, minWidth: 18, textAlign: "center" }}>{qty}</span>
+                        <button onClick={() => onQty(product.id, 1)} style={{ background: "none", border: "none", padding: "4px 8px" }}><Plus size={12} /></button>
+                      </div>
+                      <button onClick={() => onRemove(product.id)} style={{ background: "none", border: "none", color: "var(--danger)", display: "flex", alignItems: "center", gap: 4, fontSize: 12 }}>
+                        <Trash2 size={13} /> Remove
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mono" style={{ fontWeight: 500 }}>{money(product.price * qty)}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12, padding: 20, alignSelf: "start" }}>
+              <h3 style={{ margin: "0 0 14px", fontSize: 16 }}>Order summary</h3>
+              <Row label="Subtotal" value={money(subtotal)} />
+              <Row label="Marketplace fee" value={money(fee)} sub />
+              <Row label="Shipping" value={money(shipping)} />
+              <div className="xc-perf" style={{ margin: "12px 0" }} />
+              <Row label="Total" value={money(total)} bold />
+              <button onClick={onCheckout} style={{ width: "100%", background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 8, padding: "12px", marginTop: 14, fontSize: 14, fontWeight: 500 }}>
+                Proceed to checkout
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      function Row({ label, value, bold, sub }) {
+        return (
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", fontSize: bold ? 16 : 13, fontWeight: bold ? 600 : 400, color: sub ? "var(--ink-soft)" : "var(--ink)" }}>
+            <span>{label}</span>
+            <span className="mono">{value}</span>
+          </div>
+        );
+      }
+
+      function Checkout({ subtotal, shipping, total, walletCredit, walletApplied, walletSavings, onToggleWallet, onPlace, onBack }) {
+        const [form, setForm] = useState({ name: "", address: "", city: "", zip: "", card: "" });
+        const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+        const valid = form.name && form.address && form.city && form.zip && form.card.length >= 4;
+        return (
+          <div style={{ maxWidth: 640, margin: "0 auto" }}>
+            <button onClick={onBack} style={{ background: "none", border: "none", display: "flex", alignItems: "center", gap: 4, color: "var(--ink-soft)", marginBottom: 18, fontSize: 13 }}>
+              <ChevronLeft size={16} /> Back to cart
+            </button>
+            <h2 style={{ marginBottom: 20 }}>Checkout</h2>
+
+            <div style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12, padding: 20, marginBottom: 16 }}>
+              <h3 style={{ fontSize: 14, margin: "0 0 12px", color: "var(--ink-soft)" }}>SHIPPING ADDRESS</h3>
+              <FormRow label="Full name"><input value={form.name} onChange={set("name")} style={inputStyle} placeholder="Jordan Rivers" /></FormRow>
+              <FormRow label="Address"><input value={form.address} onChange={set("address")} style={inputStyle} placeholder="12 Millbrook Lane" /></FormRow>
+              <div style={{ display: "flex", gap: 10 }}>
+                <FormRow label="City" flex><input value={form.city} onChange={set("city")} style={inputStyle} placeholder="Abuja" /></FormRow>
+                <FormRow label="ZIP / postal code" flex><input value={form.zip} onChange={set("zip")} style={inputStyle} placeholder="900001" /></FormRow>
+              </div>
+            </div>
+
+            <div style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12, padding: 20, marginBottom: 16 }}>
+              <h3 style={{ fontSize: 14, margin: "0 0 12px", color: "var(--ink-soft)" }}>PAYMENT (DEMO — NO REAL CHARGE)</h3>
+              <FormRow label="Card number"><input value={form.card} onChange={set("card")} style={inputStyle} placeholder="4242 4242 4242 4242" /></FormRow>
+            </div>
+
+            <div style={{ background: "rgba(235,213,184,0.24)", border: "1px solid rgba(184,148,100,0.25)", borderRadius: 12, padding: 18, marginBottom: 16 }}>
+              <div className="mono" style={{ fontSize: 12, color: "var(--brass)", marginBottom: 6 }}>WALLET CREDIT AVAILABLE</div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+                <div>
+                  <div style={{ fontSize: 18, fontWeight: 700 }}>{money(walletCredit)}</div>
+                  <div style={{ fontSize: 12, color: "var(--ink-soft)" }}>Use this credit toward checkout on Xcellent-market Hub.</div>
+                </div>
+                <button onClick={onToggleWallet} style={{ background: walletApplied ? "var(--brass)" : "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 8, padding: "10px 14px", fontSize: 12, fontWeight: 600 }}>
+                  {walletApplied ? "Wallet applied" : "Apply wallet"}
+                </button>
+              </div>
+            </div>
+
+            <div style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12, padding: 20 }}>
+              <Row label="Subtotal" value={money(subtotal)} />
+              {walletApplied && <Row label="Wallet credit" value={`-${money(walletSavings)}`} sub />}
+              <Row label="Shipping" value={money(shipping)} />
+              <div className="xc-perf" style={{ margin: "12px 0" }} />
+              <Row label="Total due" value={money(total - (walletApplied ? walletSavings : 0))} bold />
+              <button disabled={!valid} onClick={onPlace} style={{
+                width: "100%", background: valid ? "var(--forest)" : "var(--line)", color: valid ? "var(--paper)" : "var(--ink-soft)",
+                border: "none", borderRadius: 8, padding: "12px", marginTop: 14, fontSize: 14, fontWeight: 500
+              }}>
+                Place order
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      const inputStyle = { width: "100%", padding: "9px 12px", border: "1px solid var(--line)", borderRadius: 7, fontSize: 14, background: "var(--paper)", outline: "none", fontFamily: "inherit" };
+
+      function FormRow({ label, children, flex }) {
+        return (
+          <div style={{ marginBottom: 12, flex: flex ? 1 : "none" }}>
+            <label style={{ display: "block", fontSize: 12, color: "var(--ink-soft)", marginBottom: 5 }}>{label}</label>
+            {children}
+          </div>
+        );
+      }
+
+      function Confirmation({ order, onBrowse, onOrders }) {
+        return (
+          <div style={{ maxWidth: 480, margin: "40px auto", textAlign: "center" }}>
+            <div style={{ width: 56, height: 56, borderRadius: "50%", background: "var(--forest)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+              <Check size={26} color="var(--paper)" />
+            </div>
+            <h2 style={{ margin: "0 0 6px" }}>Order placed</h2>
+            <p style={{ color: "var(--ink-soft)", marginBottom: 20 }}>Confirmation <span className="mono">{order.id}</span> · {order.date}</p>
+            <div style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12, padding: 20, textAlign: "left", marginBottom: 20 }}>
+              {order.items.map(({ product, qty }) => (
+                <Row key={product.id} label={`${product.title} × ${qty}`} value={money(product.price * qty)} />
+              ))}
+              <div className="xc-perf" style={{ margin: "12px 0" }} />
+              <Row label="Total paid" value={money(order.total)} bold />
+            </div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+              <button onClick={onOrders} style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 8, padding: "10px 18px", fontSize: 13 }}>View orders</button>
+              <button onClick={onBrowse} style={{ background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 8, padding: "10px 18px", fontSize: 13 }}>Keep browsing</button>
+            </div>
+          </div>
+        );
+      }
+
+      const MOCK_ORDERS = [
+        { id: "XC-48213", date: "Jun 28, 2026", status: "Delivered", total: 66500, items: "Suya spice kit, Youthful ginger cake spice bundle" },
+        { id: "XC-47990", date: "Jun 15, 2026", status: "In transit", total: 189000, items: "Aso-oke earrings" },
+        { id: "XC-47600", date: "May 30, 2026", status: "Delivered", total: 28000, items: "Oriki scented candle ×2" },
+      ];
+
+      function Orders({ onBrowse }) {
+        const badge = (status) => {
+          const map = { Delivered: "var(--success)", "In transit": "var(--brass)", Cancelled: "var(--danger)" };
+          return <span className="mono" style={{ fontSize: 11, color: map[status] || "var(--ink-soft)", border: `1px solid ${map[status] || "var(--line)"}`, borderRadius: 20, padding: "3px 10px" }}>{status}</span>;
+        };
+        return (
+          <div style={{ maxWidth: 700, margin: "0 auto" }}>
+            <Section title="Order history" />
+            {MOCK_ORDERS.map(o => (
+              <div key={o.id} style={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12, padding: 16, marginBottom: 12, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
+                <div>
+                  <div style={{ fontWeight: 500, fontSize: 14, marginBottom: 4 }} className="mono">{o.id}</div>
+                  <div style={{ fontSize: 13, color: "var(--ink-soft)" }}>{o.items}</div>
+                  <div style={{ fontSize: 12, color: "var(--ink-soft)", marginTop: 4 }}>{o.date}</div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  {badge(o.status)}
+                  <div className="mono" style={{ marginTop: 8, fontWeight: 500 }}>{money(o.total)}</div>
+                </div>
+              </div>
+            ))}
+            <button onClick={onBrowse} style={{ background: "none", border: "1px solid var(--line)", borderRadius: 8, padding: "9px 16px", fontSize: 13, marginTop: 6 }}>Browse more listings</button>
+          </div>
+        );
+      }
+
+      const MOCK_LISTINGS = [
+        { id: "p1", title: "Hand-turned oak bowl", price: 42, stock: 14, sold: 96, status: "Active" },
+        { id: "p7", title: "Linen napkin set of 6", price: 34, stock: 30, sold: 63, status: "Active" },
+        { id: "p9", title: "Cutting board, walnut", price: 55, stock: 0, sold: 21, status: "Out of stock" },
+      ];
+
+      const MOCK_SELLER_ORDERS = [
+        { id: "XC-48213", buyer: "J. Rivers", item: "Hand-turned oak bowl", amount: 42, status: "Awaiting shipment" },
+        { id: "XC-48190", buyer: "S. Anand", item: "Linen napkin set of 6", amount: 34, status: "Shipped" },
+        { id: "XC-48155", buyer: "T. Okafor", item: "Hand-turned oak bowl", amount: 42, status: "Delivered" },
+      ];
+
+      function SellerDashboard({ tab, setTab }) {
+        const revenue = 4260;
+        const feeRate = 0.08;
+        const feesPaid = revenue * feeRate;
+        const payout = revenue - feesPaid;
+
+        return (
+          <div>
+            <Section eyebrow="Old Timber Co." title="Seller dashboard" />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, marginBottom: 24 }}>
+              <MetricCard label="Revenue (30d)" value={money(revenue)} icon={<TrendingUp size={16} />} />
+              <MetricCard label="Marketplace fees" value={`-${money(feesPaid)}`} sub={`${(feeRate * 100).toFixed(0)}% rate`} />
+              <MetricCard label="Net payout" value={money(payout)} accent />
+              <MetricCard label="Active listings" value="12" />
+            </div>
+
+            <div style={{ display: "flex", gap: 6, marginBottom: 18, borderBottom: "1px solid var(--line)" }}>
+              {["listings", "orders"].map(t => (
+                <button key={t} onClick={() => setTab(t)} style={{
+                  background: "none", border: "none", padding: "10px 16px", fontSize: 13, fontWeight: 500,
+                  borderBottom: tab === t ? "2px solid var(--forest)" : "2px solid transparent",
+                  color: tab === t ? "var(--ink)" : "var(--ink-soft)"
+                }}>{t === "listings" ? "Listings" : "Incoming orders"}</button>
+              ))}
+            </div>
+
+            {tab === "listings" ? (
+              <div>
+                <button style={{ display: "flex", alignItems: "center", gap: 6, background: "var(--forest)", color: "var(--paper)", border: "none", borderRadius: 8, padding: "9px 16px", fontSize: 13, marginBottom: 14 }}>
+                  <PlusCircle size={15} /> New listing
+                </button>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                  <thead>
+                    <tr style={{ textAlign: "left", color: "var(--ink-soft)", borderBottom: "1px solid var(--line)" }}>
+                      <th style={th}>Listing</th><th style={th}>Price</th><th style={th}>Stock</th><th style={th}>Sold</th><th style={th}>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {MOCK_LISTINGS.map(l => (
+                      <tr key={l.id} style={{ borderBottom: "1px solid var(--line)" }}>
+                        <td style={td}>{l.title}</td>
+                        <td style={{ ...td }} className="mono">{money(l.price)}</td>
+                        <td style={td}>{l.stock}</td>
+                        <td style={td}>{l.sold}</td>
+                        <td style={td}>
+                          <span style={{ fontSize: 11, color: l.status === "Active" ? "var(--success)" : "var(--danger)" }}>{l.status}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div>
+                {MOCK_SELLER_ORDERS.map(o => (
+                  <div key={o.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid var(--line)", fontSize: 13 }}>
+                    <div>
+                      <div className="mono" style={{ fontWeight: 500 }}>{o.id}</div>
+                      <div style={{ color: "var(--ink-soft)" }}>{o.item} · {o.buyer}</div>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <div className="mono">{money(o.amount)}</div>
+                      <div style={{ fontSize: 11, color: "var(--ink-soft)" }}>{o.status}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      const th = { padding: "8px 10px" };
+      const td = { padding: "10px 10px" };
+
+      function MetricCard({ label, value, sub, icon, accent }) {
+        return (
+          <div style={{ background: accent ? "var(--forest)" : "var(--surface)", color: accent ? "var(--paper)" : "var(--ink)", border: accent ? "none" : "1px solid var(--line)", borderRadius: 10, padding: 14 }}>
+            <div style={{ fontSize: 11, color: accent ? "var(--brass-light)" : "var(--ink-soft)", display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }}>{icon}{label.toUpperCase()}</div>
+            <div className="mono" style={{ fontSize: 18, fontWeight: 500 }}>{value}</div>
+            {sub && <div style={{ fontSize: 11, color: "var(--ink-soft)", marginTop: 2 }}>{sub}</div>}
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<XcelCommerce />);
+    </script>
+  </body>
+</html>
