@@ -5,83 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Xcellent-market Hub — Premium Nigerian Marketplace</title>
     <style>
+      :root {
+        --bg-color: #f2efe4;
+        --text-color: #1b1e1a;
+        --form-bg: #fff;
+      }
+
       body {
-  margin: 0;
-  background: #f2efe4;
-  color: #1b1e1a;
-  font-family: "Work Sans", sans-serif;
+        margin: 0;
+        background: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Work Sans", sans-serif;
+        font-size: 16px;
+        overflow-x: hidden;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 100%;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 2rem;
+      }
+
+      .form-box {
+        width: 400px;
+        padding: 2rem;
+        background: var(--form-bg);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin: 1rem;
+        transition: background 0.3s;
+      }
+
+      /* Dark theme variables */
+      body.dark {
+        --bg-color: #1b1e1a;
+        --text-color: #f2efe4;
+        --form-bg: #2a2d29;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          padding: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
         body {
-  font-size: 16px;
-}
+          font-size: 14px;
+        }
+        .form-box {
+          width: 95%;
+          padding: 1rem;
+          margin: 0 auto;
+        }
+        h1, h2 {
+          font-size: 1.2rem;
+          text-align: center;
+        }
+        input, button {
+          width: 100%;
+          box-sizing: border-box;
+          font-size: 0.9rem;
+        }
+      }
 
-@media (max-width: 480px) {
-  body {
-  margin: 0;
-  background: #f2efe4;
-  color: #1b1e1a;
-  font-family: "Work Sans", sans-serif;
-  font-size: 16px;
-  overflow-x: hidden; /* prevents sideways scrolling */
-}
+      #root {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-/* Container for promo + form */
-.container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;       /* allows wrapping instead of overflow */
-  max-width: 100%;
-}
+      img, div {
+        max-width: 100%;
+        height: auto;
+      }
 
-/* Responsive adjustments for tablets and phones */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;   /* stack vertically */
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
-  }
-}
-
-/* Specific mobile tweaks */
-@media (max-width: 480px) {
-  body {
-    font-size: 14px; /* slightly smaller text */
-  }
-  input, button {
-    width: 100%;     /* full width for tapping */
-    box-sizing: border-box;
-  }
-  .form-box {
-    width: 95%;      /* shrink form box to fit screen */
-    padding: 1rem;
-    margin: 0 auto;
-  }
-  h1, h2 {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-}
-
-/* Root wrapper */
-#root {
-  width: 100%;
-  max-width: 480px; /* keeps it narrow on phones */
-  margin: 0 auto;   /* centers content */
-  padding: 1rem;
-}
-
-/* Prevent images/divs from overflowing */
-img, div {
-  max-width: 100%;
-  height: auto;
-}
-
-}
-
+      /* Theme toggle button */
+      .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        background: var(--form-bg);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
+    <div id="root">
+      <div class="container">
+        <div class="form-box">
+          <h2>Welcome back</h2>
+          <form>
+            <input type="email" placeholder="Email address" required />
+            <br /><br />
+            <input type="password" placeholder="Password" required />
+            <br /><br />
+            <button type="submit">Enter marketplace</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleTheme() {
+        document.body.classList.toggle("dark");
+      }
+    </script>
+  </body>
+</html>
 
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
